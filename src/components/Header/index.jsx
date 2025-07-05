@@ -19,8 +19,7 @@ export const Header = () => {
   );
 };
 
-// **UPRAVENÁ GLOBÁLNÍ FUNKCE NAVIGATION**
-const navigation = () => {
+const Navigation = () => {
   const navBtn = document.querySelector('.nav-btn');
   const rolloutNav = document.querySelector('.rollout-nav');
 
@@ -36,11 +35,13 @@ const navigation = () => {
     });
     console.log('Navigační prvky nalezeny a posluchače nastaveny.');
   } else {
-    // **ODSTRANĚNA REKURSIVNÍ SMYČKA setTimeout(navigation, 100);**
-    // Pokud se prvky nenajdou, jen to zalogujeme, ale nezacyklíme stránku.
-    // To znamená, že navigace nemusí fungovat, pokud se vykreslí po spuštění tohoto skriptu.
     console.log('Navigační prvky nenalezeny při načítání DOMu. React se možná ještě nevykreslil.');
   }
 };
-// Spustíme inicializaci, jakmile je DOM plně načten
-document.addEventListener('DOMContentLoaded', navigation);
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Přidáme malé zpoždění, abychom dali čas na vykreslení
+  setTimeout(() => {
+    Navigation();
+  }, 100);
+});
